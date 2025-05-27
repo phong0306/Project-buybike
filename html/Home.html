@@ -416,6 +416,38 @@
     window.addEventListener('DOMContentLoaded', function() {
         setCart(getCart());
     });
+
+    // Hiển thị info-box mượt mà trên mobile khi nhấn vào ảnh
+    function enableMobileBikeInfoBox() {
+        function isMobile() {
+            return window.innerWidth <= 900;
+        }
+        document.querySelectorAll('.img-box').forEach(box => {
+            // Xóa sự kiện cũ nếu có
+            box.onclick = null;
+            if (isMobile()) {
+                box.onclick = function(e) {
+                    // Nếu click vào nút add-to-cart thì bỏ qua
+                    if (e.target.closest('.add-to-cart')) return;
+                    // Đóng các info-box khác
+                    document.querySelectorAll('.img-box.show-info').forEach(b => {
+                        if (b !== box) b.classList.remove('show-info');
+                    });
+                    // Toggle info-box hiện tại
+                    box.classList.toggle('show-info');
+                };
+            }
+        });
+        if (isMobile()) {
+            document.addEventListener('click', function handler(e) {
+                if (!e.target.closest('.img-box')) {
+                    document.querySelectorAll('.img-box.show-info').forEach(b => b.classList.remove('show-info'));
+                }
+            }, {capture: true, once: true});
+        }
+    }
+    window.addEventListener('DOMContentLoaded', enableMobileBikeInfoBox);
+    window.addEventListener('resize', enableMobileBikeInfoBox);
     </script>
 </body>
 </html>
