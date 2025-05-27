@@ -14,12 +14,27 @@ function renderCart() {
         if (checkoutWrap) checkoutWrap.style.display = 'none';
         return;
     }
+    // Sửa lỗi: Nếu dữ liệu từ Home.html chỉ là tên sản phẩm (string), chuyển thành object mặc định
+    cart = cart.map(item => {
+        if (typeof item === 'string') {
+            // Nếu chỉ có tên, trả về object mặc định (không có ảnh, giá)
+            return { name: item, img: '', price: '' };
+        }
+        return item;
+    });
     // Group by product name+img+price for quantity
     const grouped = {};
     cart.forEach(item => {
-        const key = item.name + '|' + item.img + '|' + item.price;
+        // Đảm bảo đường dẫn ảnh đúng thư mục ../img/
+        let img = item.img;
+        if (img && !/^https?:\/\//.test(img) && !img.startsWith('/')) {
+            if (!img.startsWith('../img/')) {
+                img = '../img/' + img.split('/').pop();
+            }
+        }
+        const key = item.name + '|' + img + '|' + item.price;
         if (!grouped[key]) {
-            grouped[key] = { ...item, quantity: 1, key };
+            grouped[key] = { ...item, img, quantity: 1, key };
         } else {
             grouped[key].quantity += 1;
         }
@@ -44,9 +59,9 @@ function renderCart() {
             total += subtotal;
             return `
             <div class="cart-row" data-key="${encodeURIComponent(item.key)}">
-                <div class="cart-col-img"><img src="${item.img}" alt="${item.name}"></div>
+                <div class="cart-col-img"><img src="${item.img || '../img/no-image.png'}" alt="${item.name}"></div>
                 <div class="cart-col-name">${item.name}</div>
-                <div class="cart-col-price">${item.price}</div>
+                <div class="cart-col-price">${item.price || ''}</div>
                 <div class="cart-col-qty">
                     <div class="qty-control-group">
                         <button class="qty-btn minus" type="button">-</button>
@@ -70,39 +85,62 @@ function renderCart() {
     if (checkoutWrap) checkoutWrap.style.display = '';
 }
 
+// Hàm này sẽ đồng bộ dữ liệu giỏ hàng từ localStorage (được Home.js cập nhật) và render lại giao diện
+function syncCartFromLocalStorage() {
+    renderCart();
+}
+
+// Đảm bảo luôn cập nhật giỏ hàng khi quay lại/truy cập Card.html
+window.addEventListener('storage', function(e) {
+    if (e.key === 'cart') {
+        syncCartFromLocalStorage();
+    }
+});
+
+// Khi vào trang Card.html, luôn lấy dữ liệu mới nhất từ localStorage
 document.addEventListener('DOMContentLoaded', function() {
     renderCart();
     const cartList = document.getElementById('cart-list');
     if (cartList) {
         cartList.addEventListener('click', function(e) {
-            const row = e.target.closest('.cart-row');
-            if (!row) return;
-            const key = decodeURIComponent(row.getAttribute('data-key'));
-            let cart = [];
-            try {
-                cart = JSON.parse(localStorage.getItem('cart')) || [];
-            } catch(e) {}
-            const [name, img, price] = key.split('|');
-            const currentQty = cart.filter(item => item.name === name && item.img === img && item.price === price).length;
-            if (e.target.classList.contains('plus')) {
-                cart.push({ name, img, price });
-                localStorage.setItem('cart', JSON.stringify(cart));
-                renderCart();
-            } else if (e.target.classList.contains('minus')) {
-                if (currentQty > 1) {
-                    const idx = cart.findIndex(
-                        item => item.name === name && item.img === img && item.price === price
-                    );
-                    if (idx !== -1) {
-                        cart.splice(idx, 1);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        renderCart();
+            let target = e.target;
+            if (!target.classList.contains('plus') && !target.classList.contains('minus') && !target.classList.contains('remove-btn')) {
+                if (target.closest('.qty-btn')) target = target.closest('.qty-btn');
+                if (target.closest('.remove-btn')) target = target.closest('.remove-btn');
+            }
+            if (target.classList.contains('plus') || target.classList.contains('minus') || target.classList.contains('remove-btn')) {
+                const row = target.closest('.cart-row');
+                if (!row) return;
+                const key = decodeURIComponent(row.getAttribute('data-key'));
+                let cart = [];
+                try {
+                    cart = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch(e) {}
+                const [name, img, price] = key.split('|');
+                if (target.classList.contains('plus')) {
+                    cart.push({ name, img, price });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                } else if (target.classList.contains('minus')) {
+                    // Nếu chỉ còn 1 sản phẩm thì xóa luôn, nếu nhiều hơn thì giảm số lượng
+                    const currentQty = cart.filter(item => item.name === name && item.img === img && item.price === price).length;
+                    if (currentQty <= 1) {
+                        cart = cart.filter(item => !(item.name === name && item.img === img && item.price === price));
+                    } else {
+                        const idx = cart.findIndex(
+                            item => item.name === name && item.img === img && item.price === price
+                        );
+                        if (idx !== -1) {
+                            cart.splice(idx, 1);
+                        }
                     }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                } else if (target.classList.contains('remove-btn')) {
+                    cart = cart.filter(item => !(item.name === name && item.img === img && item.price === price));
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
                 }
-            } else if (e.target.classList.contains('remove-btn')) {
-                cart = cart.filter(item => !(item.name === name && item.img === img && item.price === price));
-                localStorage.setItem('cart', JSON.stringify(cart));
-                renderCart();
             }
         });
     }
@@ -125,3 +163,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Xóa toàn bộ sản phẩm trong giỏ hàng (dùng cho nút "Clear Cart")
+function clearCart() {
+    localStorage.removeItem('cart');
+    renderCart();
+}
+
+// Ví dụ: Thêm nút xóa toàn bộ giỏ hàng (nếu muốn)
+// document.getElementById('clear-cart-btn').addEventListener('click', clearCart);

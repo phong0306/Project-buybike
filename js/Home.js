@@ -102,9 +102,17 @@ function addToCart(event, name) {
     const label = imgBox.querySelector('.img-label');
     const addToCartDiv = imgBox.querySelector('.add-to-cart');
     const price = extractPrice(addToCartDiv.textContent.trim());
+    // Lấy đúng tên file ảnh (kể cả .png, .jpg, ...)
+    let imgSrc = img ? img.getAttribute('src') : "";
+    if (imgSrc) {
+        // Nếu là đường dẫn tuyệt đối thì giữ nguyên, nếu không thì chỉ lấy tên file
+        if (!/^https?:\/\//.test(imgSrc) && !imgSrc.startsWith('/')) {
+            imgSrc = imgSrc.split('/').pop();
+        }
+    }
     const product = {
         name: label ? label.textContent.trim() : name,
-        img: img ? img.src : "",
+        img: imgSrc,
         price: price
     };
     let cart = [];
@@ -155,9 +163,14 @@ function renderCart() {
     // Group by product name+img+price for quantity
     const grouped = {};
     cart.forEach((item, idx) => {
-        const key = item.name + '|' + item.img + '|' + item.price;
+        // Đảm bảo đường dẫn ảnh đúng thư mục ../img/
+        let img = item.img;
+        if (img && !/^https?:\/\//.test(img) && !img.startsWith('/')) {
+            img = '../img/' + img;
+        }
+        const key = item.name + '|' + img + '|' + item.price;
         if (!grouped[key]) {
-            grouped[key] = { ...item, quantity: 1, key };
+            grouped[key] = { ...item, img, quantity: 1, key };
         } else {
             grouped[key].quantity += 1;
         }
@@ -249,3 +262,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Xóa toàn bộ sản phẩm trong giỏ hàng (dùng cho nút hoặc thao tác xóa toàn bộ)
+function clearCart() {
+    localStorage.removeItem('cart');
+    updateCartCount();
+}
+
+// Ví dụ: Thêm nút xóa toàn bộ giỏ hàng (nếu muốn)
+// document.getElementById('clear-cart-btn').addEventListener('click', clearCart);
