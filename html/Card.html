@@ -81,6 +81,13 @@
                 }
             });
         }
+        // Thêm sự kiện cho nút CHECKOUT để chuyển sang trang Checkout.html
+        var checkoutBtn = document.getElementById('checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', function() {
+                window.location.href = "Checkout.html";
+            });
+        }
     });
     </script>
 </body>
