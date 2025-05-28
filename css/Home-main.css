@@ -455,7 +455,7 @@ html
     body {
       margin: 0;
       padding: 0;
-      background: url('img/pexels-pixabay-235922.jpg') no-repeat center center ;
+      background: url('../img/pexels-pixabay-235922.jpg') no-repeat center center ;
       background-size: cover;
       min-height: 100vh; 
     }
