@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- SEO Meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy Bike - The best choice for premium Road, Gravel, and TT bikes. Shop now for top brands and world-class service.">
+    <meta name="keywords" content="Buy Bike, Road Bike, Gravel Bike, TT Bike, Bicycle Shop, Premium Bikes, Cycling, Shop Online">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Buy Bike Team">
+    <link rel="canonical" href="https://yourdomain.com/index.html">
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <title>BUY BIKE</title>
     <link rel="stylesheet" href="css/Bar.css">
     <link rel="stylesheet" href="css/Home-main.css">
@@ -38,13 +46,13 @@
                 <li><a href="#" >ABOUT</a></li>
                 <li><a href="#" >BIKE</a>
                     <ul>
-                        <li><a href="#">TimeTrial-TT</a></li>
-                        <li><a href="#">Road</a></li>
-                        <li><a href="#">Gravel</a></li>
+                        <li><a href="#road-bike-group" onclick="scrollToBikeGroup(event, 'tt')">TimeTrial-TT</a></li>
+                        <li><a href="#gravel-bike-group" onclick="scrollToBikeGroup(event, 'road')">Road</a></li>
+                        <li><a href="#tt-bike-group" onclick="scrollToBikeGroup(event, 'gravel')">Gravel</a></li>
                     </ul>
                 </li>
                 <li><a href="#" >SUPPORT</a></li>
-                <li><a href="#" >CONTACT US</a></li>
+                <li><a href="../html/Contact.html" >CONTACT US</a></li>
             </ul>
         </nav>
         <div class="search-box" id="searchBox">
@@ -73,7 +81,7 @@
 
         <div class="bike-group-container" style="position:relative; min-height:600px;">
             <!-- Nhóm Road bike -->
-            <div class="bike-group bike-road active">
+            <div class="bike-group bike-road active" id="road-bike-group">
                 <section class="hero-section">
                     <div style="display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;">
                         <!-- Road bike group -->
@@ -81,7 +89,7 @@
                             <div class="img-title">Road bike</div>
                             <section class="hero-section">
                                 <div class="img-box info-right">
-                                    <img class="img-main" src="img/z6609307192225_04d4660f1b504fb44d24a7a07631e086.jpg" alt="">
+                                    <img class="img-main" src="img/z6609307192225_04d4660f1b504fb44d24a7a07631e086.jpg" alt="Cervelo S5" loading="lazy" width="300" height="250">
                                     <div class="img-label" style="background: #e53935;">CERVELO</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Cervelo')">
                                         <span class="cart-icon">
@@ -106,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="img-box info-center">
-                                    <img class="img-main" src="img/z6609307192238_1f9aefc6cad2905581cf21571fe6bc8f.jpg" alt="">
+                                    <img class="img-main" src="img/z6609307192238_1f9aefc6cad2905581cf21571fe6bc8f.jpg" alt="Trek Madone SLR" loading="lazy" width="300" height="250">
                                     <div class="img-label" style="background: #fbc02d; color: #222;">TREK</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Trek')">
                                         <span class="cart-icon">
@@ -135,7 +143,7 @@
                                     </div>
                                 </div>
                                 <div class="img-box info-left">
-                                    <img class="img-main" src="img/z6609307192245_92c8210d8a397daad6e27f88454da8bf.jpg" alt="">
+                                    <img class="img-main" src="img/z6609307192245_92c8210d8a397daad6e27f88454da8bf.jpg" alt="Factor OSTRO VAM" loading="lazy" width="300" height="250">
                                     <div class="img-label" style="background: #1976d2;">FACTOR</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Factor')">
                                         <span class="cart-icon">
@@ -166,7 +174,7 @@
             </div>
 
             <!-- Nhóm Gravel bike -->
-            <div class="bike-group bike-gravel">
+            <div class="bike-group bike-gravel" id="gravel-bike-group">
                 <section class="hero-section">
                     <div style="display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;">
                         <!-- Gravel bike group -->
@@ -174,7 +182,7 @@
                             <div class="img-title">Gravel bike</div>
                             <section class="hero-section">
                                 <div class="img-box info-right">
-                                    <img class="img-main" src="img/SCOTT_GRAVEL.png" alt="" height="150px" width="300px">
+                                    <img class="img-main" src="img/SCOTT_GRAVEL.png" alt="Scott Addict Gravel" loading="lazy" width="300" height="150">
                                     <div class="img-label" style="background: #979797; ">SCOTT</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Scott')">
                                         <span class="cart-icon">
@@ -199,7 +207,7 @@
                                     </div>
                                 </div>
                                 <div class="img-box info-center">
-                                    <img class="img-main" src="img/CANYON-GRAVEL.jpg" alt="">
+                                    <img class="img-main" src="img/CANYON-GRAVEL.jpg" alt="Canyon Grail CF SLX" loading="lazy" width="300" height="250">
                                     <div class="img-label" style="background: #ffb300; color: #222;">CANYON</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Canyon')">
                                         <span class="cart-icon">
@@ -228,7 +236,7 @@
                                     </div>
                                 </div>
                                 <div class="img-box info-left">
-                                    <img class="img-main" src="img/GIANT_GRAVEL.jpg" alt="">
+                                    <img class="img-main" src="img/GIANT_GRAVEL.jpg" alt="Giant Revolt Advanced" loading="lazy" width="300" height="250">
                                     <div class="img-label" style="background: #3949ab;">GIANT</div>
                                     <div class="add-to-cart" onclick="addToCart(event, 'Giant')">
                                         <span class="cart-icon">
@@ -259,96 +267,96 @@
             </div>
 
             <!-- Nhóm TT bike -->
-            <div class="bike-group bike-tt">
+            <div class="bike-group bike-tt" id="tt-bike-group">
                 <div class="img-title">TT bike</div>
                 <section class="hero-section">
-                    <div style="display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; ">    
-                    <div class="img-box info-right">
-                        <img class="img-main" src="img/TT1.png" alt="">
-                        <div class="img-label" style="background: #8e24aa;">CERVELO-P5X</div>
-                        <div class="add-to-cart" onclick="addToCart(event, 'P5X')">
-                            <span class="cart-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </span>
-                            $18,000
-                        </div>
-                        <div class="bike-info-box">
-                            <strong>Cervelo P5X</strong>
-                            <div>Frame: Carbon</div>
-                            <div>Groupset: Shimano Dura-Ace Di2</div>
-                            <div>Wheels: Enve SES 7.8</div>
-                            <div>Weight: 8.9kg</div>
-                            <div>Brakes: Hydraulic Disc</div>
-                            <div>Handlebar: Cervelo Carbon Aero</div>
-                            <div>Seatpost: Carbon Aero</div>
-                            <div>Warranty: 5 years</div>
-                            <div>Country: Canada</div>
-                            <div>Best for: Triathlon, Time Trial</div>
-                            <div>Color: Black/Purple</div>
-                            <div>Size: S, M, L, XL</div>
-                        </div>
-                    </div>
-                    <div class="img-box info-center">
-                        <img class="img-main" src="img/TT2.png" alt="">
-                        <div class="img-label" style="background: #00bcd4;">CANYON</div>
-                        <div class="add-to-cart" onclick="addToCart(event, 'Canyon')">
-                            <span class="cart-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </span>
-                            $14,000
-                        </div>
-                        <div class="bike-info-box bike-info-center-2col">
-                            <div class="bike-info-col">
-                                <strong>Canyon Speedmax CFR</strong>
+                    <div style="display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; ">
+                        <div class="img-box info-right">
+                            <img class="img-main" src="img/TT1.png" alt="Cervelo P5X" loading="lazy" width="300" height="250">
+                            <div class="img-label" style="background: #8e24aa;">CERVELO-P5X</div>
+                            <div class="add-to-cart" onclick="addToCart(event, 'P5X')">
+                                <span class="cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </span>
+                                $18,000
+                            </div>
+                            <div class="bike-info-box">
+                                <strong>Cervelo P5X</strong>
                                 <div>Frame: Carbon</div>
                                 <div>Groupset: Shimano Dura-Ace Di2</div>
-                                <div>Wheels: Zipp 858 NSW</div>
-                                <div>Weight: 8.4kg</div>
-                                <div>Size: S, M, L, XL</div>
-                                <div>Color: Blue/Black</div>
-                            </div>
-                            <div class="bike-info-col">
+                                <div>Wheels: Enve SES 7.8</div>
+                                <div>Weight: 8.9kg</div>
                                 <div>Brakes: Hydraulic Disc</div>
-                                <div>Handlebar: Canyon Carbon Aero</div>
+                                <div>Handlebar: Cervelo Carbon Aero</div>
                                 <div>Seatpost: Carbon Aero</div>
-                                <div>Warranty: 6 years</div>
+                                <div>Warranty: 5 years</div>
+                                <div>Country: Canada</div>
+                                <div>Best for: Triathlon, Time Trial</div>
+                                <div>Color: Black/Purple</div>
+                                <div>Size: S, M, L, XL</div>
+                            </div>
+                        </div>
+                        <div class="img-box info-center">
+                            <img class="img-main" src="img/TT2.png" alt="Canyon Speedmax CFR" loading="lazy" width="300" height="250">
+                            <div class="img-label" style="background: #00bcd4;">CANYON</div>
+                            <div class="add-to-cart" onclick="addToCart(event, 'Canyon')">
+                                <span class="cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </span>
+                                $14,000
+                            </div>
+                            <div class="bike-info-box bike-info-center-2col">
+                                <div class="bike-info-col">
+                                    <strong>Canyon Speedmax CFR</strong>
+                                    <div>Frame: Carbon</div>
+                                    <div>Groupset: Shimano Dura-Ace Di2</div>
+                                    <div>Wheels: Zipp 858 NSW</div>
+                                    <div>Weight: 8.4kg</div>
+                                    <div>Size: S, M, L, XL</div>
+                                    <div>Color: Blue/Black</div>
+                                </div>
+                                <div class="bike-info-col">
+                                    <div>Brakes: Hydraulic Disc</div>
+                                    <div>Handlebar: Canyon Carbon Aero</div>
+                                    <div>Seatpost: Carbon Aero</div>
+                                    <div>Warranty: 6 years</div>
+                                    <div>Country: Germany</div>
+                                    <div>Best for: Triathlon, Time Trial</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="img-box info-left">
+                            <img class="img-main" src="img/TT3.png" alt="Cube Aerium C:68 SLT" loading="lazy" width="300" height="250">
+                            <div class="img-label" style="background: #ff7043;">CUBE</div>
+                            <div class="add-to-cart" onclick="addToCart(event, 'Cube')">
+                                <span class="cart-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </span>
+                                $12,500
+                            </div>
+                            <div class="bike-info-box">
+                                <strong>Cube Aerium C:68 SLT</strong>
+                                <div>Frame: C:68 Carbon</div>
+                                <div>Groupset: SRAM Red eTap AXS</div>
+                                <div>Wheels: Newmen Advanced SL R.65</div>
+                                <div>Weight: 8.7kg</div>
+                                <div>Brakes: Hydraulic Disc</div>
+                                <div>Handlebar: Cube Carbon Aero</div>
+                                <div>Seatpost: Carbon Aero</div>
+                                <div>Warranty: 5 years</div>
                                 <div>Country: Germany</div>
                                 <div>Best for: Triathlon, Time Trial</div>
+                                <div>Color: Orange/Black</div>
+                                <div>Size: S, M, L, XL</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="img-box info-left">
-                        <img class="img-main" src="img/TT3.png" alt="">
-                        <div class="img-label" style="background: #ff7043;">CUBE</div>
-                        <div class="add-to-cart" onclick="addToCart(event, 'Cube')">
-                            <span class="cart-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </span>
-                            $12,500
-                        </div>
-                        <div class="bike-info-box">
-                            <strong>Cube Aerium C:68 SLT</strong>
-                            <div>Frame: C:68 Carbon</div>
-                            <div>Groupset: SRAM Red eTap AXS</div>
-                            <div>Wheels: Newmen Advanced SL R.65</div>
-                            <div>Weight: 8.7kg</div>
-                            <div>Brakes: Hydraulic Disc</div>
-                            <div>Handlebar: Cube Carbon Aero</div>
-                            <div>Seatpost: Carbon Aero</div>
-                            <div>Warranty: 5 years</div>
-                            <div>Country: Germany</div>
-                            <div>Best for: Triathlon, Time Trial</div>
-                            <div>Color: Orange/Black</div>
-                            <div>Size: S, M, L, XL</div>
-                        </div>
-                    </div>
                     </div>
                 </section>
             </div>
         </div>
     </main>
     <main id="main-bg-section" class="main-full-bg">
-        <img src="img/photo-1533015598395-ef428edc7a84.png" alt="Main 3 Image" class="full-bg-img">
+        <img src="img/photo-1533015598395-ef428edc7a84.png" alt="Main 3 Image" class="full-bg-img" loading="lazy" width="1920" height="600">
         <div class="main-bg-content">
             <h2 class="main-bg-title">ATHLETES & TEAMS</h2>
             <p class="main-bg-desc">Working with world-class athletes allows us prove our products where it counts most.</p>
@@ -477,6 +485,36 @@
     }
     window.addEventListener('DOMContentLoaded', enableMobileBikeInfoBox);
     window.addEventListener('resize', enableMobileBikeInfoBox);
+
+    function scrollToBikeGroup(e, type) {
+        e.preventDefault();
+        let id = '';
+        if (type === 'road') id = 'road-bike-group';
+        else if (type === 'gravel') id = 'gravel-bike-group';
+        else if (type === 'tt') id = 'tt-bike-group';
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        // Optional: switch tab if needed
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-target') === type) btn.classList.add('active');
+        });
+        document.querySelectorAll('.bike-group').forEach(group => {
+            group.classList.remove('active');
+        });
+        const groupEl = document.getElementById(id);
+        if (groupEl) groupEl.classList.add('active');
+    }
     </script>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>&copy; 2024 <strong>Buy Bike</strong>. All rights reserved.</span>
+            <span class="footer-links">
+                <a href="index.html">Home</a> | 
+                <a href="#">About</a> | 
+                <a href="html/Contact.html">Contact</a>
+            </span>
+        </div>
+    </footer>
 </body>
 </html>

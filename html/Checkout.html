@@ -313,7 +313,7 @@
 </head>
 <body>
     <header>
-        <div class="header-row">
+        <div class="header-row container-fluid">
             <a href="../index.html" class="buy-bike"><h1>BUY BIKE</h1></a>
             <div class="search-icon" onclick="toggleSearch()">
                 <i class="fas fa-search"></i>
@@ -322,7 +322,7 @@
                 <i class="fas fa-bars"></i>
             </div>
         </div>
-        <nav class="bar">
+        <nav class="bar container">
             <ul>
                 <li><a href="../index.html">HOME</a></li>
                 <li><a href="#">ABOUT</a></li>
@@ -338,11 +338,11 @@
             </ul>
         </nav>
         <div class="search-box" id="searchBox">
-            <input type="text" placeholder="Search...">
+            <input type="text" class="form-control" placeholder="Search...">
         </div>
     </header>
     <main>
-        <div class="checkout-container">
+        <div class="checkout-container container">
             <div class="checkout-title">Payment Method</div>
             <div class="payment-methods" id="payment-methods">
                 <div class="pay-method-indicator" id="pay-method-indicator"></div>
